@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AFK</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="afk-overlay">
+        <div id="afk-panel">
+            <div id="afk-scanline"></div>
+
+            <div id="afk-header">
+                <span id="afk-dot"></span>
+                <span id="afk-label">X1S &middot; AFK MONITOR</span>
+            </div>
+
+            <div id="afk-ring-wrap">
+                <svg id="afk-ring" viewBox="0 0 160 160">
+                    <circle class="ring-bg" cx="80" cy="80" r="70"></circle>
+                    <circle id="ring-progress" cx="80" cy="80" r="70"></circle>
+                </svg>
+                <div id="afk-time">05:00</div>
+            </div>
+
+            <h1 id="afk-title">YOU'RE AWAY</h1>
+            <p id="afk-sub">Session ends when the timer hits zero</p>
+
+            <button id="afk-back">
+                <span>I'M BACK</span>
+                <kbd>ENTER</kbd>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

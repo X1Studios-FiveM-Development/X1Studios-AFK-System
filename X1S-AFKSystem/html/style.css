@@ -1,0 +1,201 @@
+:root {
+    --accent: #35e6ff;
+    --accent-dim: rgba(53, 230, 255, 0.15);
+    --bg-panel: rgba(9, 13, 19, 0.9);
+    --border: rgba(53, 230, 255, 0.35);
+    --text-dim: rgba(210, 225, 235, 0.55);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent !important;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+#afk-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .35s ease;
+    background: transparent;
+}
+
+#afk-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#afk-panel {
+    position: relative;
+    width: 360px;
+    padding: 34px 36px 30px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 0 40px var(--accent-dim);
+    text-align: center;
+    overflow: hidden;
+    transform: scale(.92) translateY(10px);
+    transition: transform .35s cubic-bezier(.2, .9, .25, 1), border-color .4s ease, box-shadow .4s ease;
+}
+
+#afk-overlay.visible #afk-panel {
+    transform: scale(1) translateY(0);
+}
+
+#afk-overlay.danger #afk-panel {
+    animation: pulse-glow 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50%      { transform: scale(1.015) translateY(0); }
+}
+
+#afk-scanline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    top: 0%;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: .5;
+    animation: scan 3.2s linear infinite;
+    transition: background .4s ease;
+}
+
+@keyframes scan {
+    0%   { top: 0%; }
+    100% { top: 100%; }
+}
+
+#afk-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    color: var(--text-dim);
+}
+
+#afk-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 1.4s ease-in-out infinite;
+    transition: background .4s ease, box-shadow .4s ease;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: .35; transform: scale(.7); }
+}
+
+#afk-ring-wrap {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 20px;
+}
+
+#afk-ring {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.08);
+    stroke-width: 6;
+}
+
+#ring-progress {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 439.8;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear, stroke .4s ease, filter .4s ease;
+    filter: drop-shadow(0 0 6px var(--accent));
+}
+
+#afk-time {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+#afk-title {
+    margin: 0 0 6px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+#afk-sub {
+    margin: 0 0 24px;
+    font-size: 12.5px;
+    color: var(--text-dim);
+}
+
+#afk-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--accent-dim);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background .2s ease, transform .15s ease, color .2s ease, border-color .4s ease;
+}
+
+#afk-back:hover {
+    background: var(--accent);
+    color: #06121a;
+}
+
+#afk-back:active {
+    transform: scale(.97);
+}
+
+#afk-back kbd {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid currentColor;
+    opacity: .7;
+}
